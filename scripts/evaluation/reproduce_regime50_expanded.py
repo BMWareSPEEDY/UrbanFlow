@@ -6,8 +6,8 @@ targets at 50 mm/hr / 60 min) and runs the production EnsembleFloodPredictorV4
 0.64/0.24/0.04/0.08) on each catchment graph. Writes both data files consumed by
 downstream documents and benchmarks:
 
-  data/regime50_expanded_ensemble_full_table.json           (7-col vector)
-  data/regime50_expanded_full_table_16city.json             (full cell table)
+  data/regimes/regime50_expanded_ensemble_full_table.json           (7-col vector)
+  data/regimes/regime50_expanded_full_table_16city.json             (full cell table)
 """
 import json
 import os
@@ -97,10 +97,10 @@ def main():
             f"Acc={acc:5.1f} MAE={mae:6.2f} RMSE={rmse:6.2f}"
         )
 
-    json.dump(vec, open("data/regime50_expanded_ensemble_full_table.json", "w"), indent=1)
-    json.dump(rows, open("data/regime50_expanded_full_table_16city.json", "w"), indent=1)
-    print("saved data/regime50_expanded_ensemble_full_table.json")
-    print("saved data/regime50_expanded_full_table_16city.json")
+    json.dump(vec, open("data/regimes/regime50_expanded_ensemble_full_table.json", "w"), indent=1)
+    json.dump(rows, open("data/regimes/regime50_expanded_full_table_16city.json", "w"), indent=1)
+    print("saved data/regimes/regime50_expanded_ensemble_full_table.json")
+    print("saved data/regimes/regime50_expanded_full_table_16city.json")
 
 
 if __name__ == "__main__":

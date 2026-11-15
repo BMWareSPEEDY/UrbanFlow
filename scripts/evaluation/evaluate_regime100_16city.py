@@ -37,7 +37,7 @@ def main():
     e_mean = ck['e_mean'].to(device); e_std = ck['e_std'].to(device)
     yl_mean = ck['yl_mean'].to(device); yl_std = ck['yl_std'].to(device)
 
-    swmm = json.load(open('data/regime100_literal_swmm_rows_16city.json'))
+    swmm = json.load(open('data/regimes/regime100_literal_swmm_rows_16city.json'))
 
     def predict(g, I_override=100.0, D_override=60.0):
         with torch.no_grad():
@@ -157,8 +157,8 @@ def main():
         'pct30': round(mb['pct_30'], 1),
     }
     print(f"\n  POOLED 16: {len(yt)} nodes | SWMM>15={rows['_pooled_16']['swmm_gt15']} >30={rows['_pooled_16']['swmm_gt30']} | MAE={mb['mae']*100:.2f}cm | F1={mb['f1_h']:.4f} | Rec={mb['rec_c']*100:.1f}% | Prec={mb['prec_c']*100:.1f}%")
-    json.dump(rows, open('data/regime100_honest_full_table_16city.json', 'w'), indent=1)
-    print("saved data/regime100_honest_full_table_16city.json")
+    json.dump(rows, open('data/regimes/regime100_honest_full_table_16city.json', 'w'), indent=1)
+    print("saved data/regimes/regime100_honest_full_table_16city.json")
 
 if __name__ == '__main__':
     main()

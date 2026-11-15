@@ -1,4 +1,4 @@
-﻿"""Replace seed-42 synthetic elevation on the 5 Bangalore test regions with REAL
+"""Replace seed-42 synthetic elevation on the 5 Bangalore test regions with REAL
 Terrarium/SRTM z14 terrain. Preserves node/edge topology; rewrites elevation,
 recomputes edge grades; saves back to the original filenames (originals backed up
 as *_synth.graphml)."""

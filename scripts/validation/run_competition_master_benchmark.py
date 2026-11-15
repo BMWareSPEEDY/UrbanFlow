@@ -127,14 +127,14 @@ print(f"  -> Volumetric Mass Continuity Error:       {mass_continuity_err:.2f}% 
 # 2. EVALUATE 100 MM/HR CLOUDBURST STRESS TEST (GOAL 2)
 # =========================================================================
 # Genuine literal-100 mm/hr / 60 min EPA SWMM 5.2 engine runs across all 16
-# catchments (data/regime100_literal_swmm_rows_16city.json) as the SWMM
+# catchments (data/regimes/regime100_literal_swmm_rows_16city.json) as the SWMM
 # reference, paired with the model called at I_override=100.0, D_override=60.0
-# (data/regime100_honest_full_table_16city.json). The API 100 mm/hr path scales
+# (data/regimes/regime100_honest_full_table_16city.json). The API 100 mm/hr path scales
 # the 50 mm/hr reference by (rain/50) and therefore does NOT qualify as a
 # genuine cloudburst field; that override-era result (20,966 flooded / MAE
 # 7.81 cm / Tokyo 3,409) is withdrawn in favor of the honest literal-100 runs.
 print("\n[3/5] Loading genuine literal-100 mm/hr cloudburst field (EPA SWMM 5.2) for all 16 catchments...")
-_S5_PATH = "data/regime100_benchmark_s5_threshold15.json"
+_S5_PATH = "data/regimes/regime100_benchmark_s5_threshold15.json"
 if not os.path.exists(_S5_PATH):
     raise SystemExit(f"FATAL: genuine literal-100 table not found at {_S5_PATH}; "
                      "run scripts/evaluation/compute_s5_threshold15.py first.")
@@ -179,7 +179,7 @@ rec_100 = (tp_100 / (tp_100 + fn_100)) * 100.0 if (tp_100 + fn_100) > 0 else 100
 prec_100 = (tp_100 / (tp_100 + fp_100)) * 100.0 if (tp_100 + fp_100) > 0 else 100.0
 f1_100 = (2 * prec_100 * rec_100 / (prec_100 + rec_100)) if (prec_100 + rec_100) > 0 else 0.0
 # MAE is not reconstructable from the s5 summary table; recompute from honest table
-_HONEST = "data/regime100_honest_full_table_16city.json"
+_HONEST = "data/regimes/regime100_honest_full_table_16city.json"
 _honest_rows = json.load(open(_HONEST))
 pooled_h = _honest_rows.get('_pooled_16', {})
 mae_100 = float(pooled_h.get('mae_cm', 0.0))

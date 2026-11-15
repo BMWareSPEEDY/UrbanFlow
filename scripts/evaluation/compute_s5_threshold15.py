@@ -10,7 +10,7 @@ x_mean = ck['x_mean'].to(device); x_std = ck['x_std'].to(device)
 e_mean = ck['e_mean'].to(device); e_std = ck['e_std'].to(device)
 yl_mean = ck['yl_mean'].to(device); yl_std = ck['yl_std'].to(device)
 dl = torch.load('datasets/multi_scenario_physics_pyg_dataset.pt', weights_only=False)
-sw = json.load(open('data/regime100_literal_swmm_rows_16city.json'))
+sw = json.load(open('data/regimes/regime100_literal_swmm_rows_16city.json'))
 
 def predict(g, I=100.0, D=60.0):
     with torch.no_grad():
@@ -79,5 +79,5 @@ for reg, city, region in pairs:
     mae = np.abs(p - y).mean() * 100
     res[reg] = (len(order), int(np.sum(y > thr)), int(np.sum(p > thr)), tp, fp, fn, round(prec, 1), round(rec, 1), round(f1, 1), round(mae, 2))
     print(f"{reg:11s}: N={len(order)} SWMM={int(np.sum(y > thr))} MDL={int(np.sum(p > thr))} TP={tp} FP={fp} FN={fn} P={prec:.1f} R={rec:.1f} F1={f1:.1f} MAE={mae:.2f}")
-json.dump(res, open('data/regime100_benchmark_s5_threshold15.json', 'w'), indent=1)
-print("saved data/regime100_benchmark_s5_threshold15.json")
+json.dump(res, open('data/regimes/regime100_benchmark_s5_threshold15.json', 'w'), indent=1)
+print("saved data/regimes/regime100_benchmark_s5_threshold15.json")

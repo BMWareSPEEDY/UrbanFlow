@@ -22,7 +22,7 @@ CATCHMENTS = {
 }
 
 SCEN = {'intensity': 100.0, 'duration': 60, 'profile': 'cloudburst'}
-OUT = 'data/regime100_literal_swmm_rows_16city.json'
+OUT = 'data/regimes/regime100_literal_swmm_rows_16city.json'
 
 def main():
     print("CITY => running genuine literal-100 (100 mm/hr / 60 min) EPA SWMM via pyswmm")

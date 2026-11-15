@@ -317,7 +317,7 @@ def main() -> None:
                         round(float(v), 5) for v in g.y.view(-1).tolist()
                     ]
 
-        r100_path = os.path.join(DATA_DIR, "regime100_literal_swmm_rows_all.json")
+        r100_path = os.path.join(DATA_DIR, "regimes", "regime100_literal_swmm_rows_all.json")
         if os.path.exists(r100_path):
             with open(r100_path, "r") as f:
                 raw100 = json.load(f)
