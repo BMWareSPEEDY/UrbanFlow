@@ -1,7 +1,7 @@
 # UrbanFLOW: Comprehensive 16-City Scientific Benchmark Report
 > **Evaluation Environment:** Pure Neural Inference (`HydroGINE-v5` v5.10+v5.11+v5.0+BangaloreOpt ensemble) | Zero SWMM Runtime Dependencies | Live HTTP Server (`http://127.0.0.1:5001/api/predict`)
 > **Total Networks Evaluated:** 16 Regional Catchments | **Total Physical Nodes:** 76,316 nodes | **Storm Regimes:** 50 mm/hr (reference) & 100 mm/hr (stress)
-> **Canonical source of truth:** `data/canonical_metrics.json` (live-computed). Superseded fabricated figures (4.06 cm MAE, 0.8941 NSE, 82.9% F1, 89.3% capture, 105 mm/hr / 28 incidents) have been removed.
+> **Canonical source of truth:** `data/canonical_metrics.json` (live-computed). I removed the superseded fabricated figures (4.06 cm MAE, 0.8941 NSE, 82.9% F1, 89.3% capture, 105 mm/hr / 28 incidents).
 
 ## 1. Executive Summary Across All 76,316 Nodes (50 mm/hr Reference)
 
@@ -63,7 +63,7 @@
 | **Delhi Yamuna Floodplain** | 2,951 | **2.41** | 6.88 | 7.4 cm | 13.1 cm | 79.3 | 93.0% | **95.8%** | 99.0% |
 | **GLOBAL AVERAGE** | **76,316** | **2.44** | 9.29 | 6.9 cm | 11.8 cm | 289.9 | 94.2% | **96.7%** | **98.9%** |
 
-Average live end-to-end API latency across the 16-catchment sweep is **85.5 ms** (single-catchment tensor forward passes 4.0-15.0 ms).
+I measured an average live end-to-end API latency of **85.5 ms** across the 16-catchment sweep (single-catchment tensor forward passes 4.0-15.0 ms).
 
 ---
 
@@ -89,7 +89,7 @@ Average live end-to-end API latency across the 16-catchment sweep is **85.5 ms**
 | **Delhi Yamuna Floodplain** | 30 | 21 | 0 | 9 | 70.0% | 100.0% |
 | **TOTAL HOTSPOTS** | **480** | **356** | **0** | **124** | **74.2%** | **99.4%** |
 
-At these highest-consequence nodes the surrogate attains 99.4% categorical hazard recall but only 74.2% depth agreement within $\pm 15$ cm; all 124 disagreements are conservative under-predictions (zero over-predictions).
+At these highest-consequence nodes my surrogate attains 99.4% categorical hazard recall but only 74.2% depth agreement within $\pm 15$ cm; all 124 disagreements are conservative under-predictions (zero over-predictions).
 
 ---
 
@@ -114,14 +114,14 @@ At these highest-consequence nodes the surrogate attains 99.4% categorical hazar
 | **Mumbai Coastal Floodplain** | 2,741 | 770 | 515 | 506 | 9 | 264 | 98.3% | **65.7%** | 78.8% | **15.97** |
 | **Delhi Yamuna Floodplain** | 2,951 | 792 | 543 | 533 | 10 | 259 | 98.2% | **67.3%** | 79.9% | **15.65** |
 
-**NOTE ON THE 100 mm/hr §5 TABLE:** **All 16 rows above are genuine literal-100 EPA SWMM 5.2 engine results** (100 mm/hr / 60 min, per-node depths in `data/regime100_literal_swmm_rows_16city.json`, model called with `I_override=100.0, D_override=60.0`; flooded/TP/FP/FN at the >15 cm hazard threshold, MAE global; per-region truth table in `data/regime100_honest_full_table_16city.json` and `data/regime100_benchmark_s5_threshold15.json`). They replace the previously published rows — both the Bengaluru rows and the 11 non-Bengaluru rows (e.g., Whitefield 540/558/90.5%, Tokyo 3,409/3,490/7.20) — which were computed from 80 mm/hr SWMM targets under a 100 mm/hr rainfall override and **did not** correspond to a literal 100 mm/hr engine run; they are withdrawn. The surrogate is conservative: precision 94–99% at the cost of critical-threshold recall.
+**NOTE ON THE 100 mm/hr §5 TABLE:** **All 16 rows above are genuine literal-100 EPA SWMM 5.2 engine results that I ran** (100 mm/hr / 60 min, per-node depths in `data/regime100_literal_swmm_rows_16city.json`, model called with `I_override=100.0, D_override=60.0`; flooded/TP/FP/FN at the >15 cm hazard threshold, MAE global; per-region truth table in `data/regime100_honest_full_table_16city.json` and `data/regime100_benchmark_s5_threshold15.json`). I replaced the previously published rows — both the Bengaluru rows and the 11 non-Bengaluru rows (e.g., Whitefield 540/558/90.5%, Tokyo 3,409/3,490/7.20) — because they were computed from 80 mm/hr SWMM targets under a 100 mm/hr rainfall override and **did not** correspond to a literal 100 mm/hr engine run; I withdrew them. My surrogate is conservative: precision 94–99% at the cost of critical-threshold recall.
 
 | **GLOBAL AVERAGE** | **76,316** | 22,170 | 17,214 | 17,012 | 202 | 5,158 | 98.8% | **76.7%** | 86.4% | **17.93** |
 
-Pooled (all 16 catchments, 76,316 nodes, genuine literal-100): flooded >15 cm = **22,170 (29.1%)**, critical >30 cm = **17,678 (23.2%)**; hazard-threshold (>15 cm) precision **98.8%**, recall **76.7%**, F1 **86.4%**; critical-threshold (>30 cm) precision **97.8%**, recall **32.2%**; MAE **17.93 cm**; ≤15 cm error match **79.4%**. All figures are genuine literal-100 EPA SWMM engine runs — the 80 mm/hr-override numbers (20,966 flooded / 91.4% F1 / 7.81 cm) are withdrawn everywhere.
+I pooled all 16 catchments (76,316 nodes, genuine literal-100): flooded >15 cm = **22,170 (29.1%)**, critical >30 cm = **17,678 (23.2%)**; hazard-threshold (>15 cm) precision **98.8%**, recall **76.7%**, F1 **86.4%**; critical-threshold (>30 cm) precision **97.8%**, recall **32.2%**; MAE **17.93 cm**; ≤15 cm error match **79.4%**. All figures come from genuine literal-100 EPA SWMM engine runs — I withdrew the 80 mm/hr-override numbers (20,966 flooded / 91.4% F1 / 7.81 cm) everywhere.
 
 ---
 
 ## 6. Empirical Field Validation (October 2024 Bengaluru Monsoon)
 
-Evaluated against **13 geotagged, news-documented flood locations** across three real October 2024 Bengaluru rain events (provenance: `data/real_bengaluru_oct2024_incidents.json`). At a 100 mm/hr / 60 min reference intensity, the model captured **5 of 13 locations (38.5% capture)** within a 50 m radius of a predicted hazard node ($\ge 0.15$ m). Koramangala and Bellandur locations were captured (nearest hazard nodes 10-34 m); HSR, Whitefield and Electronic City locations lay 83-356 m away. The previously published 89.3% capture over 28 incidents during a 105 mm/hr cloudburst was fabricated and is withdrawn.
+I evaluated the model against **13 geotagged, news-documented flood locations** across three real October 2024 Bengaluru rain events (provenance: `data/real_bengaluru_oct2024_incidents.json`). At a 100 mm/hr / 60 min reference intensity, it captured **5 of 13 locations (38.5% capture)** within a 50 m radius of a predicted hazard node ($\ge 0.15$ m). Koramangala and Bellandur locations matched (nearest hazard nodes 10-34 m); HSR, Whitefield and Electronic City locations lay 83-356 m away. I withdraw the previously published 89.3% capture over 28 incidents during a 105 mm/hr cloudburst: it was fabricated.

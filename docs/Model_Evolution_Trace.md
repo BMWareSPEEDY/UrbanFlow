@@ -1,8 +1,8 @@
 # UrbanFLOW — Development & Model Evolution Trace
 
-Full lineage from the first physics-informed prototypes through the shipped
+This traces my full lineage from the first physics-informed prototypes through the shipped
 production ensemble (`HydroGINE-v5.10 + v5.11 + v5.0 + Bangalore-Opt` →
-`EnsembleFloodPredictorV4`). Every loss variant below is described with its
+`EnsembleFloodPredictorV4`). I describe every loss variant below with its
 **exact** constants, masks, and commit message, so each row is reproducible.
 
 Final headline numbers (canonical, live-computed on the shipped ensemble; source `data/canonical_metrics.json`):
@@ -22,21 +22,21 @@ Final headline numbers (canonical, live-computed on the shipped ensemble; source
 | Runtime | Speedup vs. EPA SWMM 5.2 (avg HTTP API 85.5 ms) | 1,310×–8,690× |
 | Field | Empirical capture, Oct 2024 Bengaluru monsoon | **38.5 %** (5 / 13 geotagged locations) |
 
-> The intermediate values in §1–§6 are historical per-iteration training records and are
-> not comparable to the final live-computed metrics above. Previously published figures
-> (4.06 cm MAE, 0.8941 NSE, 82.9 % F1, 89.3 % capture, 105 mm/hr / 28-incident cloudburst)
-> were unverified and are withdrawn.
+> I keep the intermediate values in §1–§6 as historical per-iteration training records; they are
+> not comparable to the final live-computed metrics above. I withdrew the previously published
+> figures (4.06 cm MAE, 0.8941 NSE, 82.9 % F1, 89.3 % capture, 105 mm/hr / 28-incident cloudburst)
+> because they were unverified.
 
 ---
 
 ## 0. Repository archaeology notes
 
-- Single branch `master`, **31 commits**. Working tree == HEAD.
-- Git loose-object store **partially corrupt** (`git fsck` bad-sha errors) — many
-  paths are unreachable, but every commit referenced below is readable.
-- `st_gnn/` research tree survived **only** at commit `996fcf4`; files must be
-  read via `git show 996fcf4:st_gnn/<path>`.
-- Early experiments used Windows paths (`D:\CODES\PYTHON_CODES\UrbanFLOW\...`)
+- I kept a single branch `master` with **31 commits**, and my working tree == HEAD.
+- My git loose-object store is **partially corrupt** (`git fsck` bad-sha errors) — many
+  paths are unreachable, but I can still read every commit referenced below.
+- My `st_gnn/` research tree survived **only** at commit `996fcf4`; I must
+  read those files via `git show 996fcf4:st_gnn/<path>`.
+- My early experiments used Windows paths (`D:\CODES\PYTHON_CODES\UrbanFLOW\...`)
   and two GPU locks (`gpu_lock_a`, `gpu_lock_b`) for parallel sweeps.
 
 ### Commit map (v5 lineage)
@@ -61,8 +61,8 @@ Final headline numbers (canonical, live-computed on the shipped ensemble; source
 ## 1. Phase 0 — Physics-informed prototypes (pre-GINE)
 
 ### 1.1 `train_pinn_gnn.py` (dispensable)
-First attempt. GATv2 backbone on the 8-feature `bengaluru_pyg_dataset.pt` with a
-physics-continuity pin loss. Replaced quickly.
+This was my first attempt: a GATv2 backbone on the 8-feature `bengaluru_pyg_dataset.pt` with a
+physics-continuity pin loss. I replaced it quickly.
 
 ### 1.2 `train_ultra_pinn.py`
 - **Architecture** `UltraPhysicsGNN`: 4 GATv2Conv layers `(heads 4→2→2→1)`,
@@ -97,9 +97,9 @@ physics-continuity pin loss. Replaced quickly.
 
 ## 2. Phase 1 — `st_gnn/` research line (iterations 1–18)
 
-Read-only archive at `996fcf4`. All runs validate on a **real-holdout**
-Bangalore + Hong Kong set; published per-intensity, per-depth-bin reports.
-Common scaffold across iters: `x.zscore`, `log1p(y)` regression target, deep-truck
+Read-only archive of mine at `996fcf4`. I validate all runs on a **real-holdout**
+Bangalore + Hong Kong set and publish per-intensity, per-depth-bin reports.
+My common scaffold across iterations: `x.zscore`, `log1p(y)` regression target, deep-truck
 streaming batches (`N_CHUNK`), gradient clipping 1.0, AdamW + CosineAnnealing.
 
 ### 2.1 Core losses per iteration
@@ -174,16 +174,15 @@ Worst residual bin in baseline: `y ∈ [0.80, 3.00)` → MAE 0.4574 m, bias −0
 - `ensemble_iter610.py`: iter6+iter10 variant.
 
 ### 2.5 SAGPool failure case (documented in §5 of the paper)
-`FiLMGINE_SAGPool` (iter18) collapsed: pooling permanently drops nodes → **spatial
+My `FiLMGINE_SAGPool` (iter18) collapsed: pooling permanently drops nodes → **spatial
 path discontinuity** — floods get confined to retained coarse nodes and never reach
-dropped downstream junctions. The specific ablation numbers previously quoted
-(Hong Kong F1 collapse 0.890 → 0.374, global MAE 24.8 cm) were **not reproducible
-from the shipped ensemble and are withdrawn**; the qualitative design rationale
-stands. Conclusion: **no destructive pooling in the production model; topology is
-always preserved**. The shipped model's Hong Kong F1 is **0.942** and its canonical
-global MAE is **2.44 cm** (50 mm/hr reference).
+dropped downstream junctions. I could not reproduce the specific ablation numbers I had
+previously quoted (Hong Kong F1 collapse 0.890 → 0.374, global MAE 24.8 cm) from the shipped
+ensemble, so I withdrew them; my qualitative design rationale still stands. Conclusion: I use
+**no destructive pooling in the production model; I always preserve topology**. The shipped
+model's Hong Kong F1 is **0.942** and my canonical global MAE is **2.44 cm** (50 mm/hr reference).
 
-### 2.6 Parallel builders in `st_gnn/`
+### 2.6 Parallel builders I wrote in `st_gnn/`
 - **`loss_builder/train_loss_variant.py`** — GINE4 with pluggable losses:
   - `v0` = baseline asym MSE (under 2.5×).
   - `v1` = **depth-adaptive** weights + pseudo-Huber(δ=0.25): `dry&over→3.0,
@@ -230,14 +229,14 @@ class MarginFocalLoss(nn.Module):
         focal_weight = alpha_t * (1.0 - p_t)**self.gamma
         return (focal_weight * bce_with_logits(logits, targets_m)).mean()
 ```
-v4 clay-pave lesson → reframed as the two-task (classify + regress + FiLM-gate) v5.
+I reframed my v4 clay-pave lesson as the two-task (classify + regress + FiLM-gate) v5.
 
 ---
 
 ## 4. Phase 3 — HydroGINE-v5 lineage (production engine)
 
-Final training file: `train_hydro_gine_v5_0.py` (== working tree == `b806d3d`),
-556 lines. **Final config block (verbatim values):**
+My final training file is `train_hydro_gine_v5_0.py` (== working tree == `b806d3d`),
+556 lines. **My final config block (verbatim values):**
 ```
 EPOCHS=300, LR=3e-4, WEIGHT_DECAY=1e-4, HIDDEN_DIM=128, N_LAYERS=6,
 N_CHUNK=20000 (reduced from 25000 after "RTX 4060 TDR/cublas fault on backward"),
@@ -261,7 +260,7 @@ MARGIN_FOCAL = MarginFocalLoss(gamma=2.0, alpha=0.35, margin=0.02)
 ### 4.1 Loss variant history (exact diffs between revisions)
 
 #### v5 base (`b53f51d`)
-Unified multi-city engine, expanded master dataset (2.35M nodes).
+I built a unified multi-city engine on my expanded master dataset (2.35M nodes).
 `MarginFocalLoss(gamma=2.0, alpha=0.35, margin=0.02)` + asymmetric MSE
 (under-pred 2.5×) + soft-dice.
 
@@ -274,39 +273,39 @@ w: y>=0.30 → 3.0, 0.15≤y<0.30 → 2.0, dry pavement → 3.0
 deep-valley power-law:  deep_w = 1 + 3.0·clamp((dep_d−1.5)/2.5, 0, 1)^2.0
 L_reg = mean(w·huber·asym)
 ```
-Warm start `hydro_gine_v5_bangalore_opt.pt`. → **82.0% live match (+4.8 pp), OVER 3141→692.**
+I warm-started from `hydro_gine_v5_bangalore_opt.pt`. → **82.0% live match (+4.8 pp), OVER 3141→692.**
 
 #### v5.1–v5.2 (`291be43`) — **Scenario-conditional asym**
 ```
 LOSS_ASSYM_UP = 1.5     # over-pred on DRY cells (y ≤ 0.15)
 LOSS_ASSYM_UNDER = 2.0  # under-pred on FLOODED cells (y > 0.15)
 ```
-(v5.1 added a global match-hinge; it exploded OVER, removed.) → **83.3 %, MAE 2.97 cm, NSE 0.866.**
+(In v5.1 I added a global match-hinge; it exploded OVER, so I removed it.) → **83.3 %, MAE 2.97 cm, NSE 0.866.**
 
 #### v5.3–v5.5 (`3f2519c`) — match-hinge/flood-gated experiments
 - `MATCH_HINGE_STRENGTH=0.0` (v5.5 test — kept for the rest of the lineage).
 - `MATCH_BAND_M=0.12` (production ±15 cm band).
-- v5.5 experimented with a **flooded-gated linear match hinge**:
+- v5.5: I experimented with a **flooded-gated linear match hinge**:
   `hinge_mask = y>0.15; match_hinge = relu(|res_lin| − 0.12)`.
 
 #### v5.6 (`b6a2ee4`) — post-rail checkpoint selection
-`SELECT_RAIL_MATCH=True`: checkpoints selected by **post-`apply_production_rails`
-rail live-match rate** (production leaderboard quantity). Rails lift raw ~47% →
+I set `SELECT_RAIL_MATCH=True` to select checkpoints by **post-`apply_production_rails`
+rail live-match rate** (my production leaderboard quantity). Rails lift raw ~47% →
 deploy-time ~83%, so raw selection picked suboptimal checkpoints.
 
 #### v5.7 (`ee57de0`) — shallow-band over-penalty
-`LOSS_ASSYM_UP_SHALLOW=1.5` on `0.15 < y ≤ 0.50` advisory band (v5.6's OVER cluster
-swmm 0.25–0.50 / pred 0.5–0.8 escaped the dry-only over-gate). → 84.07 %.
+I added `LOSS_ASSYM_UP_SHALLOW=1.5` on the `0.15 < y ≤ 0.50` advisory band, because v5.6's OVER cluster
+(swmm 0.25–0.50 / pred 0.5–0.8) escaped the dry-only over-gate. → 84.07 %.
 
 #### v5.8 (`0f90840`) — EQUAL_WEIGHT_REGIONS
-- `EQUAL_WEIGHT_REGIONS=True`: val rail-match averaged **per region equally** — the
-  node-weighted aggregate was dominated by london + nyc (largest graphs), silently
-  trading away Bengaluru districts (v5.6: hsr 84.7→76.8, bellandur 75.2→68.6).
+- I set `EQUAL_WEIGHT_REGIONS=True` to average val rail-match **per region equally** — the
+  node-weighted aggregate was dominated by london + nyc (largest graphs) and silently
+  traded away Bengaluru districts (v5.6: hsr 84.7→76.8, bellandur 75.2→68.6).
 - `DEEP_TARGET_W = 0` at this stage; ~ **84.8 % leader (OVER 977 / UNDER 1539)**.
 - `N_CHUNK = 20000`.
 
 #### v5.9 (`1367d46`) — deep-tail reweight
-**Exact diagnostic unprinted motivation:** under-prediction of deep pools
+**My exact diagnostic (unprinted) motivation:** under-prediction of deep pools
 (swmm p50 0.71 vs pred 0.42; sag≈0, dep≈2 m) + over-predicting extreme dry bowls.
 ```
 DEEP_TARGET_W = 3.0     # extra weight on y_true >= 0.50
@@ -328,8 +327,8 @@ GlbMAE 2.43 cm, HazMAE 8.85 cm, NSE 0.9060, +3.3 pp over v5.8 champion**, warm-s
 DEEP_TARGET_W     = 2.2
 DEEP_TARGET_W_MID = 1.3
 ```
-→ **87.11 %** — confirms the truth lives at 1.6; v5.10 remains leader. (This is
-the version the final ensemble leans on for deep-tail recovery.)
+→ **87.11 %** — confirming the truth lives at 1.6; I kept v5.10 as leader. (I lean on
+this version in the final ensemble for deep-tail recovery.)
 
 ### 4.2 Final combined loss (v5.11, verbatim from train body)
 ```python
@@ -444,15 +443,15 @@ backwater = relu(wse[src] − elevs[dst])  # + reverse; max-scatter per node
 p_final[~protected] = min(p_final[~protected],
                           max(max_backwater[~protected], own_storage[~protected]))
 ```
-This is the single transformer that converts raw **~47 %** accuracy into deploy-time
-**~83 %** — and the reason checkpoint selection was moved to post-rail metrics.
+This single transformer converts my raw **~47 %** accuracy into deploy-time
+**~83 %** — and the reason I moved checkpoint selection to post-rail metrics.
 
 ---
 
 ## 6. Ensembles (`EnsembleFloodPredictorV4`)
 
 ### 6.1 v5.6 + v5.8 (`b4ad8d2`, +303/−137 loc)
-v5.6 is UNDER-lean, v5.8 OVER-lean; **average raw pre-rail `p_lin` + `p_prob`,
+v5.6 is UNDER-lean and v5.8 OVER-lean, so I **average raw pre-rail `p_lin` + `p_prob`,
 then apply rails ONCE.**
 → 85.88 % match, GlbMAE 2.67 cm, NSE 0.8911, OVER **1261** / UNDER 1159, 26.7 ms/city
 (**1966×** faster than SWMM). City: hsr 78.2, bellandur 70.5, whitefield 86.0, ecity 84.3, koramangala 76.0.
@@ -468,8 +467,8 @@ weights = (0.80, 0.30, 0.05, 0.10)   # normalized by w_sum (=1.25) in __init__
 p_lin_avg = Σ w·p_lin;  p_prob_avg = Σ w·p_prob
 p_final = apply_physics_rails(x_full, ei, p_lin_avg, p_prob_avg, elev_range=relief_m)
 ```
-→ Historical per-commit live-match snapshot: **HSR 82.2 %, Bellandur 72.0 %**, Berlin 95.7 %, Singapore 95.6 %, Tokyo 94.6 %,
-Paris 93.0 %, NYC 93.4 %, **NSE 0.9098**, **OVER ≤ 851**. These live-match figures are superseded by the
+→ My historical per-commit live-match snapshot: **HSR 82.2 %, Bellandur 72.0 %**, Berlin 95.7 %, Singapore 95.6 %, Tokyo 94.6 %,
+Paris 93.0 %, NYC 93.4 %, **NSE 0.9098**, **OVER ≤ 851**. I now supersede these live-match figures with my
 canonical live-computed system metrics (hazard F1 **90.8 %**, NSE **0.9128**, MAE **2.44 cm**).
 
 ---
@@ -484,32 +483,32 @@ canonical live-computed system metrics (hazard F1 **90.8 %**, NSE **0.9128**, MA
   16 duration, 17 elev_std2, 18 dep_depth, 19 surcharge, 20 path_cap, 21 path_hops,
   22 dist_outlet, 23 elev_above_outlet, 24 slope_outlet_ratio, 25 sink_depth,
   26 inlet_cap, 27 surcharge_ratio`.
-- **`build_expanded_physics_dataset.py`** — loads `multi_scenario_physics_pyg_dataset.pt`
-  (464 graphs) + injects 6 held-out international test cities
+- **`build_expanded_physics_dataset.py`** — I load `multi_scenario_physics_pyg_dataset.pt`
+  (464 graphs) and inject 6 held-out international test cities
   (`multi_scenario_testcities_pyg_dataset.pt`, `create_testcity_dataset.py`).
-  **Valley-sink fix:** `x[:,23] = where(rel_drop≥0.50 & dep_depth≥0.05, dep_depth, 0)`;
+  **My valley-sink fix:** `x[:,23] = where(rel_drop≥0.50 & dep_depth≥0.05, dep_depth, 0)`;
   `x[:,6] = where(rel_drop≥0.50 & dep_depth≥0.08, 1.0, 0.0)`;
   **ponding index** `x[:,29] = log1p(x[:,23]·total_rain/(max(0.2, out_deg)+0.3))`.
-  Attaches `elev_range` (true catchment relief, m) for the production WSE envelope.
-- **`expanded_master_physics_dataset.pt`** — final train set, **~2.35M nodes**,
-  multi-scenario (8 storm intensities × durations), ground truth from **EPA SWMM 5.2**
+  I attach `elev_range` (true catchment relief, m) for the production WSE envelope.
+- **`expanded_master_physics_dataset.pt`** — my final train set, **~2.35M nodes**,
+  multi-scenario (8 storm intensities × durations), with ground truth I generated from **EPA SWMM 5.2**
   dynamic-wave 1D/2D on all 16 global catchments (76,316 independently audited nodes).
 
 ---
 
 ## 8. Summary of the trajectory (one paragraph)
 
-Phase 0 proved GATv2+PIN-lean formulations insufficient (≤4-layer GATs, 14–8 features).
-Phase 1 (`st_gnn`) converged on a **two-task GINE with FiLM gating + homoscedastic
-uncertainty + focal loss**, but every hierarchical/pooling variant (**SAGPool** at
-iter18) collapsed via spatial path discontinuity — establishing the hard constraint
-"**preserve full topology**". Phase 2 (v4.x) shipped that scaffold with
-MarginFocal(0.35/0.02) + log-variance weighting as the deployment v4. Phase 3
-(v5.x) is a controlled single-objective sweep of the **scenario-conditional
+In Phase 0 I proved GATv2+PIN-lean formulations insufficient (≤4-layer GATs, 14–8 features).
+In Phase 1 (`st_gnn`) I converged on a **two-task GINE with FiLM gating + homoscedastic
+uncertainty + focal loss**, but every hierarchical/pooling variant I tried (**SAGPool** at
+iter18) collapsed via spatial path discontinuity — establishing my hard constraint
+"**preserve full topology**". In Phase 2 (v4.x) I shipped that scaffold with
+MarginFocal(0.35/0.02) + log-variance weighting as my deployment v4. Phase 3 (v5.x) was my
+controlled single-objective sweep of the **scenario-conditional
 asymmetric Huber** (dry-over 1.5×, advisory-over 1.5×, flooded-under 2×), the
 **deep-tail reweight** (0 → 3.0 → **1.6** → 2.2), **equal-weight region selection**,
-and **post-rail checkpoint selection**, topped by a **weighted raw-depth ensemble**
-re-applying the physical bounding rails exactly once — landing at 88–93 % live
+and **post-rail checkpoint selection**, topped by a **weighted raw-depth ensemble** that
+re-applies the physical bounding rails exactly once — landing at 88–93 % live
 match, NSE ~0.91, with ~2 ms tensor / ~30 ms API latencies per city.
 
 *File references: `train_hydro_gine_v5_0.py`, `train_hydro_gine_v4*.py`,

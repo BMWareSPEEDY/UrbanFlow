@@ -1,15 +1,15 @@
 # UrbanFLOW — Production Set Marker
 
-Everything below is the **current, live production** system. Everything else in the repo is
-iteration / superseded / misc and is not part of the running app.
+I keep everything below as the **current, live production** system. Everything else in the repo is
+iteration / superseded / misc and is not part of the app I actually run.
 
-## How it runs
+## How I run it
 
 ```
 venv run python app.py        # the one entry point
 ```
 
-## Production files (the complete runtime set)
+## Production files (the complete runtime set I ship)
 
 | Path | Role |
 |------|------|
@@ -22,7 +22,7 @@ venv run python app.py        # the one entry point
 | `core/train_zero_tolerance_gnn.py` | `ZeroToleranceHurdleGNN` (legacy-ckpt fallback branch). |
 | `core/train_dual_stream_hydro_gnn.py` | `DualStreamHydroGNN` (legacy-ckpt fallback branch). |
 
-## Production data (loaded at startup — verified at restructure)
+## Production data (what I load at startup — verified at restructure)
 
 | Asset | Location |
 |-------|----------|
@@ -33,6 +33,6 @@ venv run python app.py        # the one entry point
 | Whole-city physics + residual ensembles | `models/urbanflow_production_model.pt`, `models/ensemble_v5_10_model.pt`, `models/zero_tolerance_gnn_checkpoint.pt`, `models/regional_residual_calibrations.pt` |
 | Benchmark endpoint data | `data/benchmarks/*.json` / `*.csv` |
 
-> Production models live in `models/`; the 4 `core/` modules are the production-imported
+> I keep the production models in `models/`; the 4 `core/` modules are the production-imported
 > Python. Everything else (the ~250 scripts under `scripts/`, older `.pt` in `models/`,
-> PDFs/docs) are iteration history — safe to archive or remove since the restructure.
+> PDFs/docs) is iteration history — I can safely archive or remove it, as I did in the restructure.

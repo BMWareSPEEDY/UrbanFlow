@@ -1,22 +1,22 @@
 # UrbanFLOW — Real-World Data Sources & Provenance (Canonical)
 
-> **What this file is.** The single, authoritative, human-readable ledger of every real-world
+> **What this file is.** The single, authoritative, human-readable ledger I maintain of every real-world
 > (non-simulated) dataset UrbanFLOW references, with the **exact source URL**, publisher, license,
-> checksum, and fetch timestamp for each. It is intended to be lifted directly into the paper's
-> References / Data Availability section when we finalize writing.
+> checksum, and fetch timestamp for each. I intend to lift it directly into the paper's
+> References / Data Availability section when I finalize writing.
 >
 > **Machine-readable twin.** The same data lives structured in
 > `data/gov_telemetry/provenance_manifest.json` (per-file `sha256`, bytes, exact CKAN resource
 > URL, organization, license, package + resource names, `fetched_at_utc`). `docs/PRODUCTION.md`
-> lists this manifest as a production runtime artifact. This markdown page exists so the sources
+> lists this manifest as a production runtime artifact. I keep this markdown page so the sources
 > stay readable and up to date inside the docs that reviewers actually read.
 
 ## Honest framing (read this first)
 
-UrbanFLOW's **per-node flood depths are physics-simulation ground truth (EPA–SWMM targets)**, not
+I use **physics-simulation ground truth (EPA–SWMM targets)** for UrbanFLOW's per-node flood depths, not
 measurements from the news. The real, downloaded government data below validates **rainfall forcing,
 lake-level telemetry, and station geography** — it is *not* a source of per-node depth. The only
-real-world claim tied to news incidents is **spatial capture** (how many documented flood locations
+real-world claim I tie to news incidents is **spatial capture** (how many documented flood locations
 fall within a radius of a predicted hazard node), documented in `docs/PRODUCTION.md` and the master
 dossier. Nothing in this file asserts that a news article reported a water depth.
 
@@ -24,10 +24,10 @@ dossier. Nothing in this file asserts that a news article reported a water depth
 
 ## 1. Rainfall — KSNDMC/IMD Bengaluru (the Oct-2024 forcing)
 
-These are the observed rainfall records for the **October 2024 Bengaluru monsoon events** that
-UrbanFLOW reproduces as simulation regimes inferns.
+These are the observed rainfall records I use for the **October 2024 Bengaluru monsoon events** that
+UrbanFLOW reproduces as simulation regimes.
 
-| File (in repo) | Exact source URL | Publisher / org | License | Fetched (UTC) | We use it for |
+| File (in repo) | Exact source URL | Publisher / org | License | Fetched (UTC) | I use it for |
 |---|---|---|---|---|---|
 | `data/gov_telemetry/rainfall_ksndmc_bengaluru/Bengaluru_Urban_Rainfall_-_2024.csv` | https://data.opencity.in/dataset/69c41714-e062-48fe-96f0-24802cb70f92/resource/00e8c7c5-5d40-4cc5-aac4-1165797ac7c8/down | KSNDMC (KSNDMC) via data.opencity.in | Other (Public Domain) | 2025-11-25 | Oct-2024 event rainfall, taluk/hobli level |
 | `data/gov_telemetry/rainfall_ksndmc_bengaluru/Bengaluru_Urban_Rainfall_-_2023.csv` | https://data.opencity.in/dataset/69c41714-e062-48fe-96f0-24802cb70f92/resource/a9b0c2dd-28df-40f5-b76e-251966fe60c3/down | KSNDMC | Other (Public Domain) | 2025-11-25 | prior-year rainfall for context |
@@ -49,11 +49,11 @@ UrbanFLOW reproduces as simulation regimes inferns.
 
 ## 2. Lake water levels — BBMP / Bengaluru lakes telemetry (real gauge values)
 
-These are genuine, per-lake telemetric water-level / STP-inlet records published by BBMP —
-the closest thing to real, government-sourced, per-location *water level* data for Bengaluru
+These are the genuine, per-lake telemetric water-level / STP-inlet records published by BBMP —
+the closest thing I have to real, government-sourced, per-location *water level* data for Bengaluru
 (not per-street-node depth, but real gauges).
 
-| File (in repo) | Exact source URL | Publisher / org | License | Fetched (UTC) | We use it for |
+| File (in repo) | Exact source URL | Publisher / org | License | Fetched (UTC) | I use it for |
 |---|---|---|---|---|---|
 | `data/gov_telemetry/lake_levels_bbmp/Jakkur_Lake_Water_Levels_2015-16.csv` | https://data.opencity.in/dataset/36741bed-897a-496a-aec3-24341aec1953/resource/04d7a180-7229-4c19-a41b-74c271a921aa/down | BBMP (Bengaluru lakes) | (not declared) | 2025-11-25 | real lake water-level curve (Jakkur) |
 | `data/gov_telemetry/lake_levels_bbmp/Kaikondrahalli_Lake_-_Water_Level_25-8-2016.csv` | https://data.opencity.in/dataset/36741bed-897a-496a-aec3-24341aec1953/resource/70cd559d-a1eb-4dac-98a3-0bb7e1099aea/down | BBMP | (not declared) | 2025-11-25 | real lake water-level sample (Kaikondrahalli) |
@@ -65,8 +65,8 @@ the closest thing to real, government-sourced, per-location *water level* data f
 ### Provenance notes (lake levels)
 - **Organization:** Bruhat Bengaluru Mahanagara Palike (BBMP) — the municipal authority for
   Bengaluru's lakes. Same body maintains the 105 water-level sensors feeding *Varuna Mitra*.
-- These gauge records are **real telemetry** (dates 2015-16), included as documented, government-
-  sourced water-level evidence. They are **not** the Oct-2024 per-node flood depths — those remain
+- These gauge records are **real telemetry** (dates 2015-16), which I include as documented, government-
+  sourced water-level evidence. They are **not** the Oct-2024 per-node flood depths — I keep those as
   SWMM-simulation targets (`datasets/*_targets.csv`).
 
 ---
@@ -74,8 +74,8 @@ the closest thing to real, government-sourced, per-location *water level* data f
 ## 3. Station lists / gauge geography — KSNDMC telemetric network
 
 These give the *locations* of the telemetric rain-gauge / AWS / lake-gauge stations that provincial
-agencies actually operate — the real spatial skeleton against which UrbanFLOW's 16 regions are
-anchored (and the ratio that underlies the 38.5% spatial-capture statistic).
+agencies actually operate — the real spatial skeleton against which I anchor UrbanFLOW's 16 regions
+(and the ratio that underlies my 38.5% spatial-capture statistic).
 
 | File (in repo) | Exact source URL | Publisher / org | License | Fetched (UTC) |
 |---|---|---|---|---|
@@ -93,36 +93,36 @@ anchored (and the ratio that underlies the 38.5% spatial-capture statistic).
 |---|---|---|---|---|
 | `data/real_bengaluru_oct2024_incidents.json` | transient research curation (geocoded from public monsoon reports; see `docs/PRODUCTION.md` + dossier) — **not** a depth source | research curation | research | n/a |
 
-**What this file is allowed to claim:** the **spatial capture** statistic (38.5%: 5 of 13
-documented locations within a 50 m radius of a predicted hazard node), never per-node depth.
+**What I allow this file to claim:** the **spatial capture** statistic (38.5%: 5 of 13
+documented locations within a 50 m radius of a predicted hazard node) — never per-node depth.
 
 ---
 
-## 5. How to keep this page up to date
+## 5. How I keep this page up to date
 
-1. When a new real dataset is downloaded, add it under `data/gov_telemetry/…` (see
+1. When I download a new real dataset, I add it under `data/gov_telemetry/…` (see
    `scripts/data_generation/fetch_gov_telemetry.py`, which writes the sha256-verified manifest).
-2. Re-run the fetcher: `.venv/bin/python scripts/data_generation/fetch_gov_telemetry.py`
+2. I re-run the fetcher: `.venv/bin/python scripts/data_generation/fetch_gov_telemetry.py`
    — it re-verifies every existing file's hash and appends new provenance to
    `data/gov_telemetry/provenance_manifest.json`.
-3. Then edit the tables above to add the row(s), copying the **exact source URL** straight from the
+3. Then I edit the tables above to add the row(s), copying the **exact source URL** straight from the
    manifest (`resource_url` field) so it never goes stale.
-4. Any new **claim** must be added to the honest-limitations list below first, never to the
-   "we use it for" column.
+4. I add any new **claim** to the honest-limitations list below first, never to the
+   "I use it for" column.
 
 ## 6. Honest limitations & what is NOT in the data
 
 - **Per-node flood depth for the Oct-2024 Bengaluru monsoon is not available from any public
   government source** (KSNDMC/KSNDMC gate-and-lake sensors are real but the per-street-node
-  *depth* telemetry is not public/open). All per-node depths in UrbanFLOW are **EPA–SWMM
-  simulation ground truth** (`datasets/swmm_*_targets.csv`).
+  *depth* telemetry is not public/open). I therefore take every per-node depth in UrbanFLOW from
+  **EPA–SWMM simulation ground truth** (`datasets/swmm_*_targets.csv`).
 - **KSNDMC rainfall telemetry is real; its *AWS gate-and-lake* sensor readings are not archived
   publicly** — the 105 water-level sensors feed BBMP's internal *Varuna Mitra* portal, not an open
-  dataset one can download. This page therefore cannot cite a public per-node depth gauge.
+  dataset one can download. I therefore cannot cite a public per-node depth gauge on this page.
 - The real **incident** set is limited to geotagged flood *locations*; it carries **no measured
   depth values** (verified: the JSON contains `lat/lon/location/description`, no `depth` field).
-- **No fabricated numbers:** the paper's only real-news-backed figure is the **spatial capture rate
-  (38.5%)**. Depth figures come from simulation targets and never from the news.
+- **No fabricated numbers:** the only figure in my paper backed by real news is the **spatial capture
+  rate (38.5%)**. I take depth figures from simulation targets and never from the news.
 
 ---
 
