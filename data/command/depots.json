@@ -1,0 +1,82 @@
+{
+  "depots": [
+    {
+      "id": "DEP-HSR-01",
+      "name": "HSR Sector 2 Yard",
+      "region": "hsr",
+      "node_id": "11178931798",
+      "lat": 12.912196,
+      "lng": 77.644277,
+      "elevation": 897.3,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-BLR-01",
+      "name": "Bellandur Lake Yard",
+      "region": "bellandur",
+      "node_id": "5777299715",
+      "lat": 12.921171,
+      "lng": 77.674199,
+      "elevation": 889.47,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-WFD-01",
+      "name": "Whitefield EPIP Yard",
+      "region": "whitefield",
+      "node_id": "1492407651",
+      "lat": 12.974446,
+      "lng": 77.746664,
+      "elevation": 882.0,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-ECT-01",
+      "name": "Electronic City Hub Yard",
+      "region": "ecity",
+      "node_id": "1597811502",
+      "lat": 12.847126,
+      "lng": 77.670453,
+      "elevation": 929.71,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-KRM-01",
+      "name": "Koramangala 4th Block Yard",
+      "region": "koramangala",
+      "node_id": "11017416949",
+      "lat": 12.930832,
+      "lng": 77.628143,
+      "elevation": 892.11,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-KRM-02",
+      "name": "Indiranagar / Domlur Yard",
+      "region": "koramangala",
+      "node_id": "1837285037",
+      "lat": 12.946032,
+      "lng": 77.640011,
+      "elevation": 894.07,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+{
+  "defaults": {
+    "pumps": 12,
+    "barriers": 8,
+    "wardens": 6
+  },
+  "depots": [
+    {
+      "id": "DEP-HSR-01",
+      "name": "HSR Sector 2 Yard",
+      "region": "hsr",
+      "node_id": "11178931798",
+      "lat": 12.912196,
+      "lng": 77.644277,
+      "elevation": 897.3,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-BLR-01",
+      "name": "Bellandur Lake Yard",
+      "region": "bellandur",
+      "node_id": "5777299715",
+      "lat": 12.921171,
+      "lng": 77.674199,
+      "elevation": 889.47,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-WFD-01",
+      "name": "Whitefield EPIP Yard",
+      "region": "whitefield",
+      "node_id": "1492407651",
+      "lat": 12.974446,
+      "lng": 77.746664,
+      "elevation": 882.0,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-ECT-01",
+      "name": "Electronic City Hub Yard",
+      "region": "ecity",
+      "node_id": "1597811502",
+      "lat": 12.847126,
+      "lng": 77.670453,
+      "elevation": 929.71,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-KRM-01",
+      "name": "Koramangala 4th Block Yard",
+      "region": "koramangala",
+      "node_id": "11017416949",
+      "lat": 12.930832,
+      "lng": 77.628143,
+      "elevation": 892.11,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    },
+    {
+      "id": "DEP-KRM-02",
+      "name": "Indiranagar / Domlur Yard",
+      "region": "koramangala",
+      "node_id": "1837285037",
+      "lat": 12.946032,
+      "lng": 77.640011,
+      "elevation": 894.07,
+      "asset_classes": [
+        "pump",
+        "warden"
+      ]
+    }
+  ],
+  "underpass_bindings": [
+    {
+      "id": "POI-HSR-001",
+      "name": "Agara Junction Underpass",
+      "category": "underpass",
+      "catchment": "hsr",
+      "node_id": "7429952399",
+      "lat": 12.923703,
+      "lng": 77.638731,
+      "snap_m": 34.3,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-HSR-002",
+      "name": "Silk Board East Ramp",
+      "category": "underpass",
+      "catchment": "hsr",
+      "node_id": "306611889",
+      "lat": 12.917256,
+      "lng": 77.624982,
+      "snap_m": 20.4,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-HSR-003",
+      "name": "Iblur West Service Underpass",
+      "category": "underpass",
+      "catchment": "hsr",
+      "node_id": "306622120",
+      "lat": 12.921204,
+      "lng": 77.651579,
+      "snap_m": 45.8,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-HSR-004",
+      "name": "Roopena Agrahara Hosur Rd Ramp",
+      "category": "underpass",
+      "catchment": "hsr",
+      "node_id": "10081671376",
+      "lat": 12.912059,
+      "lng": 77.627149,
+      "snap_m": 124.9,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-BELLANDUR-001",
+      "name": "Iblur ORR Underpass",
+      "category": "underpass",
+      "catchment": "bellandur",
+      "node_id": "9828511707",
+      "lat": 12.920644,
+      "lng": 77.66531,
+      "snap_m": 12.1,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-BELLANDUR-002",
+      "name": "Ecospace ORR Underpass",
+      "category": "underpass",
+      "catchment": "bellandur",
+      "node_id": "13877530781",
+      "lat": 12.928484,
+      "lng": 77.68137,
+      "snap_m": 27.8,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-BELLANDUR-003",
+      "name": "Devarabeesanahalli Flyover Sump",
+      "category": "underpass",
+      "catchment": "bellandur",
+      "node_id": "2446054167",
+      "lat": 12.930129,
+      "lng": 77.685144,
+      "snap_m": 19.2,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-BELLANDUR-004",
+      "name": "Bellandur Gate ORR Underpass",
+      "category": "underpass",
+      "catchment": "bellandur",
+      "node_id": "3463462869",
+      "lat": 12.926733,
+      "lng": 77.674116,
+      "snap_m": 11.8,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-WHITEFIELD-001",
+      "name": "Kundalahalli Gate Underpass",
+      "category": "underpass",
+      "catchment": "whitefield",
+      "node_id": "11434298144",
+      "lat": 12.960998,
+      "lng": 77.730752,
+      "snap_m": 137.8,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-WHITEFIELD-002",
+      "name": "Hope Farm Junction Underpass",
+      "category": "underpass",
+      "catchment": "whitefield",
+      "node_id": "11197334454",
+      "lat": 12.98381,
+      "lng": 77.752507,
+      "snap_m": 411.1,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-WHITEFIELD-003",
+      "name": "Graphite India Signal Sump",
+      "category": "underpass",
+      "catchment": "whitefield",
+      "node_id": "9873963410",
+      "lat": 12.977298,
+      "lng": 77.732395,
+      "snap_m": 109.4,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-WHITEFIELD-004",
+      "name": "Varthur Kodi Junction Sump",
+      "category": "underpass",
+      "catchment": "whitefield",
+      "node_id": "9645445136",
+      "lat": 12.956919,
+      "lng": 77.745437,
+      "snap_m": 11.3,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-WHITEFIELD-024",
+      "name": "Hope Farm Underpass",
+      "category": "underpass",
+      "catchment": "whitefield",
+      "node_id": "12171179550",
+      "lat": 12.98175,
+      "lng": 77.751935,
+      "snap_m": 0.0,
+      "source": "osm_graph_edge"
+    },
+    {
+      "id": "POI-ECITY-001",
+      "name": "Hosur Road E-City Underpass",
+      "category": "underpass",
+      "catchment": "ecity",
+      "node_id": "12450442632",
+      "lat": 12.845117,
+      "lng": 77.660229,
+      "snap_m": 74.3,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-ECITY-002",
+      "name": "Konappana Agrahara Underpass",
+      "category": "underpass",
+      "catchment": "ecity",
+      "node_id": "6749055660",
+      "lat": 12.858174,
+      "lng": 77.658963,
+      "snap_m": 110.6,
+      "source": "curated_municipal"
+    },
+    {
+      "id": "POI-ECITY-003",
+      "name": "Veerasandra BETL Underpass",
+      "category": "underpass",
+      "catchment": "ecity",
+      "node_id": "7377696416",
+      "lat": 12.834244,
+      "lng": 77.674267,
+      "snap_m": 25.7,
+      "source": "curated_municipal"
+    }
+  ],
+  "specs": {
+    "pump": {
+      "capacity_lpm": 1500,
+      "vehicle_profile": "pump_truck"
+    },
+    "barrier": {
+      "veto_window_sec": 60,
+      "bound_to": "underpass"
+    },
+    "warden": {
+      "personnel": 2,
+      "vehicle_profile": "warden"
+    }
+  }
+}

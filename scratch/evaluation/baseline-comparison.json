@@ -1,0 +1,315 @@
+{
+  "dev_catchments": [
+    "hsr",
+    "bellandur"
+  ],
+  "held_out_catchments": [
+    "whitefield",
+    "ecity",
+    "koramangala"
+  ],
+  "budget_n": 12,
+  "critical_definition": "swmm_depth_m >= 0.30 and asset_weight >= 0.85",
+  "held_out": [
+    {
+      "rain_mmhr": 20,
+      "true_critical_count": 0,
+      "ours": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b1_depth_only": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b2_random": {
+        "hits_at_n": 0.0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "wet_node_count": 713,
+      "dedup_alert_count": 202
+    },
+    {
+      "rain_mmhr": 80,
+      "true_critical_count": 6,
+      "ours": {
+        "hits_at_n": 5,
+        "covered_true_critical": 5,
+        "total_true_critical": 6,
+        "precision_at_n": 0.4167,
+        "recall_at_n": 0.8333
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 5,
+        "covered_true_critical": 5,
+        "total_true_critical": 6,
+        "precision_at_n": 0.4167,
+        "recall_at_n": 0.8333
+      },
+      "b1_depth_only": {
+        "hits_at_n": 1,
+        "covered_true_critical": 1,
+        "total_true_critical": 6,
+        "precision_at_n": 0.0833,
+        "recall_at_n": 0.1667
+      },
+      "b2_random": {
+        "hits_at_n": 0.02,
+        "precision_at_n": 0.0017,
+        "recall_at_n": 0.0033
+      },
+      "wet_node_count": 2710,
+      "dedup_alert_count": 465
+    },
+    {
+      "rain_mmhr": 100,
+      "true_critical_count": 8,
+      "ours": {
+        "hits_at_n": 5,
+        "covered_true_critical": 5,
+        "total_true_critical": 8,
+        "precision_at_n": 0.4167,
+        "recall_at_n": 0.625
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 5,
+        "covered_true_critical": 5,
+        "total_true_critical": 8,
+        "precision_at_n": 0.4167,
+        "recall_at_n": 0.625
+      },
+      "b1_depth_only": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 8,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b2_random": {
+        "hits_at_n": 0.04,
+        "precision_at_n": 0.0033,
+        "recall_at_n": 0.005
+      },
+      "wet_node_count": 2930,
+      "dedup_alert_count": 475
+    },
+    {
+      "rain_mmhr": 120,
+      "true_critical_count": 8,
+      "ours": {
+        "hits_at_n": 5,
+        "covered_true_critical": 5,
+        "total_true_critical": 8,
+        "precision_at_n": 0.4167,
+        "recall_at_n": 0.625
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 5,
+        "covered_true_critical": 5,
+        "total_true_critical": 8,
+        "precision_at_n": 0.4167,
+        "recall_at_n": 0.625
+      },
+      "b1_depth_only": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 8,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b2_random": {
+        "hits_at_n": 0.0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "wet_node_count": 3103,
+      "dedup_alert_count": 478
+    }
+  ],
+  "dev": [
+    {
+      "rain_mmhr": 20,
+      "true_critical_count": 0,
+      "ours": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b1_depth_only": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b2_random": {
+        "hits_at_n": 0.0,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "wet_node_count": 145,
+      "dedup_alert_count": 46
+    },
+    {
+      "rain_mmhr": 80,
+      "true_critical_count": 4,
+      "ours": {
+        "hits_at_n": 2,
+        "covered_true_critical": 2,
+        "total_true_critical": 4,
+        "precision_at_n": 0.1667,
+        "recall_at_n": 0.5
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 1,
+        "covered_true_critical": 1,
+        "total_true_critical": 4,
+        "precision_at_n": 0.0833,
+        "recall_at_n": 0.25
+      },
+      "b1_depth_only": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 4,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b2_random": {
+        "hits_at_n": 0.02,
+        "precision_at_n": 0.0017,
+        "recall_at_n": 0.005
+      },
+      "wet_node_count": 779,
+      "dedup_alert_count": 160
+    },
+    {
+      "rain_mmhr": 100,
+      "true_critical_count": 5,
+      "ours": {
+        "hits_at_n": 2,
+        "covered_true_critical": 2,
+        "total_true_critical": 5,
+        "precision_at_n": 0.1667,
+        "recall_at_n": 0.4
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 1,
+        "covered_true_critical": 1,
+        "total_true_critical": 5,
+        "precision_at_n": 0.0833,
+        "recall_at_n": 0.2
+      },
+      "b1_depth_only": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 5,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b2_random": {
+        "hits_at_n": 0.06,
+        "precision_at_n": 0.005,
+        "recall_at_n": 0.012
+      },
+      "wet_node_count": 864,
+      "dedup_alert_count": 171
+    },
+    {
+      "rain_mmhr": 120,
+      "true_critical_count": 5,
+      "ours": {
+        "hits_at_n": 3,
+        "covered_true_critical": 3,
+        "total_true_critical": 5,
+        "precision_at_n": 0.25,
+        "recall_at_n": 0.6
+      },
+      "b0_persistence_50": {
+        "hits_at_n": 1,
+        "covered_true_critical": 1,
+        "total_true_critical": 5,
+        "precision_at_n": 0.0833,
+        "recall_at_n": 0.2
+      },
+      "b1_depth_only": {
+        "hits_at_n": 0,
+        "covered_true_critical": 0,
+        "total_true_critical": 5,
+        "precision_at_n": 0.0,
+        "recall_at_n": 0.0
+      },
+      "b2_random": {
+        "hits_at_n": 0.06,
+        "precision_at_n": 0.005,
+        "recall_at_n": 0.012
+      },
+      "wet_node_count": 936,
+      "dedup_alert_count": 176
+    }
+  ],
+  "dedup_95_normal": {
+    "inference_latency_ms": 325.53,
+    "triage_wall_ms": 361.18,
+    "raw_above_floor": 3714,
+    "raw_eligible": 3468,
+    "dedup_alerts": 30,
+    "total_clusters": 640,
+    "suppressed": 246,
+    "critical_nodes": 2746,
+    "blocked_km": 613.06,
+    "total_edges": 29717
+  },
+  "dedup_95_red_alert": {
+    "inference_latency_ms": 325.53,
+    "triage_wall_ms": 35.21,
+    "raw_above_floor": 3714,
+    "raw_eligible": 3468,
+    "dedup_alerts": 30,
+    "total_clusters": 640,
+    "suppressed": 246,
+    "critical_nodes": 2997,
+    "blocked_km": 613.06,
+    "total_edges": 29717
+  },
+  "transit_summary": {
+    "50": {
+      "normal": 1,
+      "diverted": 4,
+      "suspended": 1
+    },
+    "95": {
+      "normal": 0,
+      "diverted": 2,
+      "suspended": 4
+    },
+    "120": {
+      "normal": 0,
+      "diverted": 2,
+      "suspended": 4
+    }
+  },
+  "routing_20_krm_ms": 33.57
+}

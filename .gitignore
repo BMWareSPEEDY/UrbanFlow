@@ -1,0 +1,50 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary SWMM simulation outputs
+*.out
+*.rpt
+temp_test_*
+*.tmp
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+.idea/
+
+# Large generated dataset caches (>400MB)
+expanded_master_physics_dataset.pt
+multi_scenario_physics_pyg_dataset.pt
+
+# Regenerable multi-hundred-MB .pt dataset caches (excluded from VCS)
+multi_scenario_full31_pyg_dataset.pt
+multi_scenario_full22_pyg_dataset.pt
+multi_scenario_pyg_dataset.pt
+multi_scenario_pyg_dataset_v2.pt
+
+# Regenerable experiment artifacts (deleted in cleanup; keep out of fresh clones)
+swmm_temporal/
+st_gnn/
+cache/
+
+# --- Node / frontend (web/ builds into static/command/, which IS committed) ---
+web/node_modules/
+web/dist/
+web/.vite/
+*.tsbuildinfo
+
+# Playwright artifacts
+test-results/
+playwright-report/
+
+# Command Layer runtime logs (append-only JSONL)
+data/command/logs/
+
