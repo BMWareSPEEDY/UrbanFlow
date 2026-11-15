@@ -13,7 +13,7 @@ Instead of only predicting nodal flood depths, UrbanFLOW translates `HydroGINE-v
 
 2. **Public Transit & Bus Safety Rerouting (`command/transit.py`, `command/routing.py`):**
    - Monitors key Bengaluru BMTC commuter bus corridors (`500D`, `500A`, `201R`, `335E`, `356C`, `KIA-7A`) and any map-selected `Origin -> Destination` pair.
-   - Compares **Flood-Naive paths (red)** against **HydroGINE Flood-Safe detours (emerald)** using vehicle clearance profiles (`bus`, `pump_truck`, `ambulance`, `fire_engine`, `warden`, `civilian`) while respecting active closed underpass barriers.
+   - Compares **Flood-Naive paths (dashed sky-blue)** against **HydroGINE Flood-Safe detours (emerald)** using vehicle clearance profiles (`bus`, `pump_truck`, `ambulance`, `fire_engine`, `warden`, `civilian`) while respecting active closed underpass barriers.
 
 ## Quickstart
 
@@ -35,8 +35,8 @@ Instead of only predicting nodal flood depths, UrbanFLOW translates `HydroGINE-v
 ### Tests & Offline Evaluation
 
 ```bash
-# Run Gate A–D & Loader Parity unit/API tests (24 tests)
-.venv/bin/python -m unittest discover -s command/tests -v
+# Run Gate A–D & Loader Parity unit/API tests (25 tests)
+.venv/bin/python -m pytest command/tests -q
 
 # Run held-out EPA SWMM 5.2 baseline evaluation (writes scratch/evaluation/)
 .venv/bin/python -m command.evaluate
@@ -49,7 +49,7 @@ cd web && npm run typecheck && npm run build
 
 - `command/` — standalone Decision & Dispatch backend (`config.py`, `loader.py`, `triage.py`, `routing.py`, `fleet.py`, `transit.py`, `state.py`, `audit.py`, `schemas.py`, `app.py`, `evaluate.py`).
 - `web/` — React + TypeScript + Deck.gl + Tailwind CSS command UI compiled into `static/command/`.
-- `data/command/` — pre-snapped municipal POIs (`pois.json`), 6 high-ground SCC depots (`depots.json`), percentile betweenness (`betweenness.json`), compact PyG graph cache (`pyg_bengaluru_50.pt`), and genuine EPA SWMM 5.2 node truth (`eval_swmm_truth.json`).
+- `data/command/` — pre-snapped municipal POIs (`pois.json`), 6 high-ground SCC depots (`depots.json`), percentile betweenness (`betweenness.json`), compact PyG graph cache (`pyg_bengaluru_50.pt`), precomputed `float32` depth grid (`precompute_grid.npz`), and genuine EPA SWMM 5.2 node truth (`eval_swmm_truth.json`).
 - Frozen unmodified files: `app.py`, `core/`, `graphs/`, `docs/`, `paper/`.
 
 ## Evaluated Performance (Held-Out EPA SWMM 5.2 Ground Truth)
@@ -66,3 +66,8 @@ Measured offline on held-out catchments (`whitefield`, `ecity`, `koramangala`) a
 - **Low-Rainfall Regime (`20 mm/hr`):** Minimal surface ponding yields zero held-out critical junctions `>= 0.30 m`, so ranking baselines tie at zero.
 - **Extreme Cloudbursts (`>= 100 mm/hr`):** Frozen `HydroGINE-v5` under-predicts tail flood depths on severe cloudbursts (`32.2%` critical recall); enabling **Red-Alert Mode** lowers Barrier/Pump action triggers (`0.09 m` / `0.25 m`) to compensate defensively.
 - **Disconnected Catchments:** Cross-catchment dispatches use an explicit `20.0 min` transfer penalty across an off-graph arterial corridor stub.
+
+## Sources & Credits
+
+- **Street Network & Hydraulic Truth:** OpenStreetMap Bengaluru road graphs, EPA SWMM 5.2 hydrodynamic simulations, and OSRM road geometry (`router.project-osrm.org`).
+- **Core Stack:** PyTorch, PyTorch Geometric, Flask, NetworkX, Shapely, React, TypeScript, MapLibre GL, Deck.gl, and Tailwind CSS.
